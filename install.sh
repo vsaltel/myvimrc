@@ -6,7 +6,7 @@ echo "(2) MacOs"
 read line
 
 if [ $line = "Unix" ] ; then
-	echo -n "You have curl ? y/n: "
+	echo -n "You have curl and run with sudo? y/n: "
 	read choice
 	if [ $choice != "y" ] ; then
 		exit
@@ -24,7 +24,7 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.v
 git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 
 if [ $line = "Unix" ] ; then
-	apt-get get install exuberant-ctags
+	apt-get install exuberant-ctags
 else
 	brew install ctags
 fi
