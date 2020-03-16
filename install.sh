@@ -5,25 +5,34 @@ echo "(1) Unix"
 echo "(2) MacOs"
 read line
 
-if [ $line = "Unix" ] ; then
+if [ $line -eq "1" ] ; then
 	echo -n "You have curl and run with sudo? y/n: "
 	read choice
 	if [ $choice != "y" ] ; then
 		exit
 	fi
-else
+else if [ $line -eq "2" ] ; then
 	echo -n "You have curl and brew? y/n: "
 	read choice
 	if [ $choice != "y" ] ; then
 		exit
 	fi
+else
+	echo "Bad number"
 	
+	
+echo "Copy Files"
 cp ./vimrc ~/.vimrc
 cp -R ./vim ~/.vim
+
+echo "Install Pathogen"
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+echo "Install Nerdtree"
 git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 
-if [ $line = "Unix" ] ; then
+echo "Install Ctags"
+if [ $line -eq "Unix" ] ; then
 	apt-get install exuberant-ctags
 else
 	brew install ctags
