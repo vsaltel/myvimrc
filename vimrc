@@ -26,5 +26,8 @@ nmap <S-j> 5j
 nmap <S-h> 5h
 nmap <S-l> 5l
 
+nmap c" ciw"<Esc>pa"<Esc>
+nmap c' ciw'<Esc>pa'<Esc>
+
 execute pathogen#infect()
 call pathogen#helptags()

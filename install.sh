@@ -19,6 +19,8 @@ else if [ $line -eq "2" ] ; then
 	fi
 else
 	echo "Bad number"
+	exit
+fi
 	
 	
 echo "Copy Files"
