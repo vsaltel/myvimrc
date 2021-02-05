@@ -11,7 +11,7 @@ if [ $line -eq "1" ] ; then
 	if [ $choice != "y" ] ; then
 		exit
 	fi
-else if [ $line -eq "2" ] ; then
+elif [ $line -eq "2" ] ; then
 	echo -n "You have curl and brew? y/n: "
 	read choice
 	if [ $choice != "y" ] ; then
