@@ -76,11 +76,15 @@ echo "Copy Files"
 cp -R vim ~/.vim
 cp ./vimrc ~/.vimrc
 
-echo "Install Pathogen"
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+if [ ! -e "~/.vim/autoload/pathogen.vim" ] ; then
+	echo "Install Pathogen"
+	mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+fi
 
-echo "Install Nerdtree"
-git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
+if [ ! -e "~/.vim/bundle/nerdtree" ] ; then
+	echo "Install Nerdtree"
+	git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
+fi
 
 if [ $USER == "root" ] ; then
 	echo "Install Ctags"
