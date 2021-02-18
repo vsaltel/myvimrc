@@ -1,31 +1,64 @@
 #!/bin/bash
 
+if [ $USER != "root" ]
+then
+	echo "Need root privileges\n"
+	exit
+fi
+
 echo "Choose OS"
 echo "(1) Unix"
 echo "(2) MacOs"
 read line
 
 if [ $line -eq "1" ] ; then
-	echo -n "You have curl and run with sudo? y/n: "
-	read choice
-	if [ $choice != "y" ] ; then
-		exit
+	if [ ! -e "/usr/bin/curl" ] ; then
+		apt install curl -y
+	fi
+	if [ ! -e "/bin/zsh" ] ; then
+		/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	fi
+	if [ ! -e "/usr/bin/git" ] ; then
+		apt install git-all -y
 	fi
 elif [ $line -eq "2" ] ; then
-	echo -n "You have curl and brew? y/n: "
-	read choice
-	if [ $choice != "y" ] ; then
-		exit
+	if [ ! -e "/usr/local/bin/brew" ] ; then
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
-else
-	echo "Bad number"
-	exit
+	if [ ! -e "/usr/bin/curl" ] ; then
+		brew install curl
+	fi
+	if [ ! -e "/bin/zsh" ] ; then
+		/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	fi
+	if [ ! -e "/usr/bin/git" ] ; then
+		brew install git
+	fi
 fi
-	
-	
+
+# Set variables
+
+if [ ! -z "$USER" ]
+then
+    echo "USER=`/usr/bin/whoami`" >> ~/.zshrc
+    echo "export USER" >> ~/.zshrc
+fi
+
+if [ ! -z "$GROUP" ]
+then
+    echo "GROUP=`/usr/bin/id -gn $user`" >> ~/.zshrc
+    echo "export GROUP" >> ~/.zshrc
+fi
+
+if [ ! -z "$MAIL" ]
+then
+    echo "MAIL="$USER@student.42.fr"" >> ~/.zshrc
+    echo "export MAIL" >> ~/.zshrc
+fi
+
 echo "Copy Files"
+cp -R vim ~/.vim
 cp ./vimrc ~/.vimrc
-cp -R ./vim ~/.vim
 
 echo "Install Pathogen"
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
@@ -39,3 +72,5 @@ if [ $line -eq "1" ] ; then
 else
 	brew install ctags
 fi
+
+source ~/.zshrc
