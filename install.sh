@@ -82,11 +82,13 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.v
 echo "Install Nerdtree"
 git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 
-echo "Install Ctags"
-if [ $line == "1" ] ; then
-	apt-get install exuberant-ctags
-else
-	brew install ctags
+if [ $USER == "root" ] ; then
+	echo "Install Ctags"
+	if [ $line == "1" ] ; then
+		apt install exuberant-ctags
+	else
+		brew install ctags
+	fi
 fi
 
 source ~/.zshrc
