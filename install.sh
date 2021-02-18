@@ -2,37 +2,49 @@
 
 if [ $USER != "root" ]
 then
-	echo "Need root privileges\n"
-	exit
+	echo "Need root privileges"
+	echo "Continue ? y/n"
+	read line
+	if [ $line -eq "y" ] ; then
+		if [ ! -e "/usr/bin/curl" || ! -e "/usr/bin/git" || ! -e "/bin/zsh" ] ; then
+			echo "Need curl/git/zsh"
+			exit
+		fi
+	else
+		exit
+	fi
 fi
 
-echo "Choose OS"
-echo "(1) Unix"
-echo "(2) MacOs"
-read line
-
-if [ $line -eq "1" ] ; then
-	if [ ! -e "/usr/bin/curl" ] ; then
-		apt install curl -y
-	fi
-	if [ ! -e "/bin/zsh" ] ; then
-		/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	fi
-	if [ ! -e "/usr/bin/git" ] ; then
-		apt install git-all -y
-	fi
-elif [ $line -eq "2" ] ; then
-	if [ ! -e "/usr/local/bin/brew" ] ; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
-	if [ ! -e "/usr/bin/curl" ] ; then
-		brew install curl
-	fi
-	if [ ! -e "/bin/zsh" ] ; then
-		/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	fi
-	if [ ! -e "/usr/bin/git" ] ; then
-		brew install git
+if [ $USER == "root" ]
+then
+	echo "Choose OS"
+	echo "(1) Unix"
+	echo "(2) MacOs"
+	read line
+	
+	if [ $line -eq "1" ] ; then
+		if [ ! -e "/usr/bin/curl" ] ; then
+			apt install curl -y
+		fi
+		if [ ! -e "/bin/zsh" ] ; then
+			/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+		fi
+		if [ ! -e "/usr/bin/git" ] ; then
+			apt install git-all -y
+		fi
+	elif [ $line -eq "2" ] ; then
+		if [ ! -e "/usr/local/bin/brew" ] ; then
+			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		fi
+		if [ ! -e "/usr/bin/curl" ] ; then
+			brew install curl
+		fi
+		if [ ! -e "/bin/zsh" ] ; then
+			/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+		fi
+		if [ ! -e "/usr/bin/git" ] ; then
+			brew install git
+		fi
 	fi
 fi
 
