@@ -91,4 +91,5 @@ if [ $USER == "root" ] ; then
 	fi
 fi
 
+echo "Source zsh"
 source ~/.zshrc
