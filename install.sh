@@ -6,7 +6,7 @@ then
 	echo "Continue ? y/n"
 	read line
 	if [ $line == "y" ] ; then
-		if [ ! -e "/usr/bin/curl" ] || [ ! -e "/usr/bin/git" ] || [ ! -e "/bin/zsh" ] ; then
+		if [ ! -e /usr/bin/curl ] || [ ! -e /usr/bin/git ] || [ ! -e /bin/zsh ] ; then
 			echo "Need curl/git/zsh"
 			exit
 		fi
@@ -27,26 +27,26 @@ fi
 if [ $USER == "root" ]
 then
 	if [ $line == "1" ] ; then
-		if [ ! -e "/usr/bin/curl" ] ; then
+		if [ ! -e /usr/bin/curl ] ; then
 			apt install curl -y
 		fi
-		if [ ! -e "/bin/zsh" ] ; then
+		if [ ! -e /bin/zsh ] ; then
 			/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 		fi
-		if [ ! -e "/usr/bin/git" ] ; then
+		if [ ! -e /usr/bin/git ] ; then
 			apt install git-all -y
 		fi
 	elif [ $line == "2" ] ; then
-		if [ ! -e "/usr/local/bin/brew" ] ; then
+		if [ ! -e /usr/local/bin/brew ] ; then
 			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		fi
-		if [ ! -e "/usr/bin/curl" ] ; then
+		if [ ! -e /usr/bin/curl ] ; then
 			brew install curl
 		fi
-		if [ ! -e "/bin/zsh" ] ; then
+		if [ ! -e /bin/zsh ] ; then
 			/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 		fi
-		if [ ! -e "/usr/bin/git" ] ; then
+		if [ ! -e /usr/bin/git ] ; then
 			brew install git
 		fi
 	fi
@@ -76,12 +76,12 @@ echo "Copy Files"
 cp -R vim ~/.vim
 cp ./vimrc ~/.vimrc
 
-if [ ! -e "~/.vim/autoload/pathogen.vim" ] ; then
+if [ ! -e ~/.vim/autoload/pathogen.vim ] ; then
 	echo "Install Pathogen"
 	mkdir -p ~/.vim/autoload ~/.vim/bundle && \curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 fi
 
-if [ ! -e "~/.vim/bundle/nerdtree" ] ; then
+if [ ! -e ~/.vim/bundle/nerdtree ] ; then
 	echo "Install Nerdtree"
 	git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 fi
