@@ -15,13 +15,17 @@ then
 	fi
 fi
 
+echo "Choose OS"
+echo "(1) Unix"
+echo "(2) MacOs"
+read line
+if [ $line != "1" ] && [ $line != "2" ] ; then
+	echo "bad number"
+	exit
+fi
+
 if [ $USER == "root" ]
 then
-	echo "Choose OS"
-	echo "(1) Unix"
-	echo "(2) MacOs"
-	read line
-	
 	if [ $line == "1" ] ; then
 		if [ ! -e "/usr/bin/curl" ] ; then
 			apt install curl -y
