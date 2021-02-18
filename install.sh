@@ -22,7 +22,7 @@ then
 	echo "(2) MacOs"
 	read line
 	
-	if [ $line -eq "1" ] ; then
+	if [ $line == "1" ] ; then
 		if [ ! -e "/usr/bin/curl" ] ; then
 			apt install curl -y
 		fi
@@ -32,7 +32,7 @@ then
 		if [ ! -e "/usr/bin/git" ] ; then
 			apt install git-all -y
 		fi
-	elif [ $line -eq "2" ] ; then
+	elif [ $line == "2" ] ; then
 		if [ ! -e "/usr/local/bin/brew" ] ; then
 			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		fi
@@ -79,7 +79,7 @@ echo "Install Nerdtree"
 git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 
 echo "Install Ctags"
-if [ $line -eq "1" ] ; then
+if [ $line == "1" ] ; then
 	apt-get install exuberant-ctags
 else
 	brew install ctags
