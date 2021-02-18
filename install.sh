@@ -5,7 +5,7 @@ then
 	echo "Need root privileges"
 	echo "Continue ? y/n"
 	read line
-	if [ $line -eq "y" ] ; then
+	if [ $line == "y" ] ; then
 		if [ ! -e "/usr/bin/curl" || ! -e "/usr/bin/git" || ! -e "/bin/zsh" ] ; then
 			echo "Need curl/git/zsh"
 			exit
